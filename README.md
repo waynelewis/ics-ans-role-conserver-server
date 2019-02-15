@@ -6,7 +6,7 @@ Ansible role to install conserver-server.
 Requirements
 ------------
 
-- ansible >= 2.3
+- ansible >= 2.2
 - molecule >= 1.24
 
 Role Variables
