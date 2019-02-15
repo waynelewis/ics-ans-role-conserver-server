@@ -1,0 +1,30 @@
+- name: install required packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - conserver-server
+
+- name: create conserver.cf file
+  template:
+    src: conserver.cf.j2
+    dest: /etc/conserver/conserver.cf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart conserver-server
+
+- name: create conserver.passwd file
+  template:
+    src: conserver.passwd.j2
+    dest: /etc/conserver/conserver.passwd
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart conserver-server
+
+- name: ensure conserver is started and enabled
+  systemd:
+    name: conserver-server
+    state: started
+    enabled: yes

@@ -1,0 +1,42 @@
+---
+ansible:
+  playbook: playbook.yml
+  group_vars:
+    default_group:
+      mariadb_root_password: new_password
+    users_group:
+      mariadb_root_password: ""
+      mariadb_databases:
+        - name: mydb
+          init_script: ./tests/mydb_create_tables.sql
+        - name: anotherdb
+      mariadb_users:
+        - name: foo
+          password: change_me
+          priv: "mydb.*:ALL"
+        - name: bar
+          password: secret
+          priv: "*.*:ALL"
+          host: "192.168.0.%"
+driver:
+  name: docker
+docker:
+  containers:
+    - name: ics-ans-role-mariadb-default
+      image: europeanspallationsource/centos-systemd
+      image_version: 7
+      # SYS_ADMIN required to run systemctl
+      cap_add:
+        - SYS_ADMIN
+      ansible_groups:
+        - default_group
+    - name: ics-ans-role-mariadb-users
+      image: europeanspallationsource/centos-systemd
+      image_version: 7
+      # SYS_ADMIN required to run systemctl
+      cap_add:
+        - SYS_ADMIN
+      ansible_groups:
+        - users_group
+verifier:
+  name: testinfra
