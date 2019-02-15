@@ -4,6 +4,7 @@
     state: present
   with_items:
     - conserver
+  become: yes
 
 - name: create conserver.cf file
   template:
@@ -13,6 +14,7 @@
     group: root
     mode: 0644
   notify: restart conserver
+  become: yes
 
 - name: create conserver.passwd file
   template:
@@ -22,9 +24,11 @@
     group: root
     mode: 0644
   notify: restart conserver
+  become: yes
 
 - name: ensure conserver is started and enabled
   systemd:
     name: conserver
     state: started
     enabled: yes
+  become: yes
