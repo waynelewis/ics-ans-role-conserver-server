@@ -1,4 +1,9 @@
 ---
+- name: Create logfile path
+  file:
+    path: /var/log/conserver
+    state: directory
+
 - include: debian.yml
   when: ansible_os_family == 'Debian'
 

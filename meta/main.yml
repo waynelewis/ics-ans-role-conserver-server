@@ -1,14 +1,17 @@
 ---
 galaxy_info:
-  author: Benjamin Bertrand
+  author: Wayne Lewis
   company: European Spallation Source ERIC
-  description: Ansible role to install mariadb.
+  description: Ansible role to install conserver-server.
   license: BSD
   min_ansible_version: 2.3
   platforms:
     - name: CentOS
       versions:
         - 7
+    - name: Debian
+      versions:
+        - 9
 dependencies: []
   # List your role dependencies here, one per line.
   # Be sure to remove the '[]' above if you add dependencies

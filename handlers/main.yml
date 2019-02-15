@@ -1,5 +1,5 @@
 ---
-- name: restart mariadb
+- name: restart conserver
   systemd:
-    name: mariadb
+    name: conserver
     state: restarted

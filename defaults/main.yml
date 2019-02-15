@@ -1,5 +1,2 @@
 ---
-mariadb_bind_address: "127.0.0.1"
-mariadb_root_password: ""
-mariadb_databases: []
-mariadb_users: []
+conserver_host: "localhost"
