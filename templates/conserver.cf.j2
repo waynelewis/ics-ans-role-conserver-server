@@ -1,4 +1,19 @@
 # {{ ansible_managed }}
 
-[mysqld]
-bind_address={{ mariadb_bind_address }}
+config * {
+}
+
+default full    { rw *; }
+default * {
+        logfile /var/log/conserver/&.log;
+        timestamp "";
+        include full;
+        master {{conserver_host}};
+}
+
+#include /etc/conserver/procs.cf
+
+access * {
+        trusted 127.0.0.1;
+        allowed 127.0.0.1;
+}
